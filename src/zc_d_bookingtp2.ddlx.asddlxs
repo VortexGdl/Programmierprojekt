@@ -1,0 +1,55 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo: { typeName: 'Booking',
+                  typeNamePlural: 'Bookings',
+                  title.value: 'BookingId',
+                  description.value: 'BookingDate' }
+
+annotate entity ZR_D_BookingTP2
+  with
+
+{
+  /* Facets */
+  @UI.facet: [ { position: 10, targetQualifier: 'BookingDetails', label: 'Booking Details', type: #FIELDGROUP_REFERENCE },
+               { position: 20, targetElement: '_Customer', label: 'Customer', type: #LINEITEM_REFERENCE },
+               { position: 30, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE } ]
+
+  /* Fields */
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.selectionField: [ { position: 10 } ]
+
+  BookingId;
+
+  @UI.fieldGroup: [ { position: 20, qualifier: 'AdminData' } ]
+  TravelId;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'AdminData' } ]
+  CustomerId;
+
+  @UI.fieldGroup: [ { position: 20, qualifier: 'BookingDetails' } ]
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.selectionField: [ { position: 20 } ]
+  BookingDate;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'BookingDetails' } ]
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.selectionField: [ { position: 30 } ]
+  AirlineId;
+
+  @UI.fieldGroup: [ { position: 40, qualifier: 'BookingDetails' } ]
+  @UI.lineItem: [ { position: 40 } ]
+  ConnectionId;
+
+  @UI.fieldGroup: [ { position: 50, qualifier: 'BookingDetails' } ]
+  @UI.lineItem: [ { position: 50 } ]
+  @UI.selectionField: [ { position: 40 } ]
+
+  FlightDate;
+
+  @UI.fieldGroup: [ { position: 60, qualifier: 'BookingDetails' } ]
+  @UI.lineItem: [ { position: 60 } ]
+  FlightPrice;
+
+  @UI.hidden: true
+  CurrencyCode;
+}

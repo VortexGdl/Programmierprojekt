@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition'
+define service ZC_D_BookingTP {
+  expose ZC_D_BookingTP;
+  expose ZC_D_CustomerTP;
+}
