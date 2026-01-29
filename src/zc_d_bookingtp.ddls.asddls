@@ -15,6 +15,7 @@ define view entity ZC_D_BookingTP
 
       BookingDate,
 
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_D_CustomerVH', element: 'CustomerId' } } ]
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold: 0.7
       CustomerId,
@@ -25,7 +26,10 @@ define view entity ZC_D_BookingTP
       ConnectionId,
       FlightDate,
       FlightPrice,
+
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CurrencyStdVH', element: 'Currency' } } ]
       CurrencyCode,
+
       /* Associations */
       _Customer : redirected to parent ZC_D_CustomerTP
 }

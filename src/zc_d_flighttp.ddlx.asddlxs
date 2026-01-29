@@ -1,0 +1,76 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo: { typeName: 'Flight', typeNamePlural: 'Flights', title.value: 'Route', description.value: 'ConnectionId' }
+@UI.lineItem: [ { criticality: 'OccupancyCriticality' } ]
+@UI.presentationVariant: [ { sortOrder: [ { by: 'FlightDate', direction: #DESC } ] } ]
+
+annotate entity ZC_D_FlightTP
+  with
+
+{
+  /* Facets */
+  @UI.facet: [ { position: 10, targetQualifier: 'FlightDetails', label: 'Customer Details', type: #FIELDGROUP_REFERENCE },
+               { position: 20, targetElement: '_Bookings', label: 'Bookings', type: #LINEITEM_REFERENCE },
+               { position: 30, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE } ]
+
+  /* Fields */
+  @UI.lineItem: [ { position: 10, label: 'Airline Id', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 10 } ]
+  CarrierId;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'FlightDetails' } ]
+  CarrierName;
+
+  @UI.fieldGroup: [ { position: 20, qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 20, label: 'Connection ID', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 20 } ]
+  ConnectionID;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 30, label: 'Flight Date', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 30 } ]
+  FlightDate;
+
+  @UI.fieldGroup: [ { position: 40, qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 40, label: 'Price', importance: #HIGH } ]
+  Price;
+
+  @UI.hidden: true
+  CurrencyCode;
+
+  @UI.fieldGroup: [ { position: 50, qualifier: 'FlightDetails' } ]
+  @UI.hidden: true
+  Route;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.lineItem: [ { position: 50, label: 'Plane Type', importance: #HIGH } ]
+  PlaneTypeId;
+
+  @UI.fieldGroup: [ { position: 20, label: 'Available Seats', qualifier: 'AdminData' } ]
+  @UI.lineItem: [ { position: 100, label: 'Available Seats' } ]
+  AvailableSeats;
+
+  @UI.lineItem: [ { position: 60, label: 'Starting Airport', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 40 } ]
+  AirportFromId;
+
+  @UI.lineItem: [ { position: 70, label: 'Landing Airport', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 50 } ]
+  AirportToID;
+
+  @UI.fieldGroup: [ { position: 90,
+                      qualifier: 'TravelDetails',
+                      criticality: 'OccupancyCriticality',
+                      criticalityRepresentation: #WITHOUT_ICON } ]
+  @UI.lineItem: [ { position: 80, criticality: 'OccupancyCriticality', criticalityRepresentation: #WITHOUT_ICON } ]
+  Auslastung;
+
+  @UI.hidden: true
+  OccupancyCriticality;
+
+  @UI.fieldGroup: [ { position: 50, label: 'Starting Airport', qualifier: 'FlightDetails' } ]
+  AirportFromName;
+
+  @UI.fieldGroup: [ { position: 60, label: 'Landing Airport', qualifier: 'FlightDetails' } ]
+  AirportToName;
+}

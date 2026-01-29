@@ -20,24 +20,22 @@ with
   /* Fields */
   @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
   @UI.lineItem: [ { position: 10, label: 'Customer ID', importance: #HIGH } ]
-  @UI.selectionField: [ { position: 10 } ]
 
   CustomerId;
 
   @UI.fieldGroup: [ { position: 20, qualifier: 'AdminData'       },
                     { position: 20, qualifier: 'CustomerDetails' } ]
-  @UI.lineItem: [ { position: 20, label: 'First Name', importance: #HIGH } ]
+  @UI.lineItem: [ { position: 20, label: 'Name', importance: #HIGH } ]
   @UI.selectionField: [ { position: 20 } ]
 
   Customer;
 
   @UI.fieldGroup: [ { position: 30, qualifier: 'CustomerDetails' } ]
-  @UI.lineItem: [ { position: 50, label: 'Street', importance: #HIGH } ]
+  @UI.lineItem: [ { position: 50, label: 'Address', importance: #HIGH } ]
   Street;
 
   @UI.fieldGroup: [ { position: 40, qualifier: 'CustomerDetails' } ]
   @UI.lineItem: [ { position: 60, label: 'Postal Code', importance: #MEDIUM } ]
-  @UI.selectionField: [ { position: 30 } ]
 
   PostalCode;
 
@@ -55,7 +53,30 @@ with
 
   @UI.fieldGroup: [ { position: 80, qualifier: 'CustomerDetails' } ]
   @UI.lineItem: [ { position: 100, label: 'Email Address', importance: #HIGH } ]
-  @UI.selectionField: [ { position: 40 } ]
-
   EmailAddress;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.hidden: true
+
+  LocalCreatedBy;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.hidden: true
+
+  LocalCreatedAt;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.hidden: true
+
+  LocalLastChangedBy;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.hidden: true
+
+  LocalLastChangedAt;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'AdminData' } ]
+  @UI.hidden: true
+
+  LastChangedAt;
 }

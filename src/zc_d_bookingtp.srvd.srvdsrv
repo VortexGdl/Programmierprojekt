@@ -2,4 +2,6 @@
 define service ZC_D_BookingTP {
   expose ZC_D_BookingTP;
   expose ZC_D_CustomerTP;
+  expose ZC_D_FlightTP;
+  expose ZC_D_BookingTP_F;
 }

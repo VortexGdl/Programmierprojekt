@@ -3,7 +3,7 @@
 @UI.headerInfo: { typeName: 'Booking',
                   typeNamePlural: 'Bookings',
                   title.value: 'BookingId',
-                  description.value: 'BookingDate' }
+                  description.value: 'AirlineId' }
 
 annotate entity ZR_D_BookingTP2
   with
@@ -11,7 +11,6 @@ annotate entity ZR_D_BookingTP2
 {
   /* Facets */
   @UI.facet: [ { position: 10, targetQualifier: 'BookingDetails', label: 'Booking Details', type: #FIELDGROUP_REFERENCE },
-               { position: 20, targetElement: '_Customer', label: 'Customer', type: #LINEITEM_REFERENCE },
                { position: 30, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE } ]
 
   /* Fields */

@@ -10,17 +10,16 @@ define view entity ZR_D_BookingTP2
   association to parent ZR_D_CustomerTP2 as _Customer on $projection.CustomerId = _Customer.CustomerId 
 
 {
-  key TravelId,
-  key BookingId,
-
+   key TravelId,
+   key BookingId,
+ConnectionId,
       BookingDate,
       CustomerId,
       CarrierId as AirlineId,
-      ConnectionId,
       FlightDate,
       FlightPrice,
       CurrencyCode,
 
       // Association
       _Customer
-}
+      }

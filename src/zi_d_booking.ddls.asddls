@@ -6,6 +6,9 @@
 
 define view entity ZI_D_Booking
   as select from /dmo/booking
+    association [1..1] to        /dmo/carrier   as _Carrier
+    on $projection.CarrierId = _Carrier.carrier_id
+    association [1..1] to /dmo/customer as _Customer on $projection.CustomerId = _Customer.customer_id
 
 {
   key travel_id     as TravelId,
@@ -21,5 +24,8 @@ define view entity ZI_D_Booking
 
       flight_price  as FlightPrice,
 
-      currency_code as CurrencyCode
+      currency_code as CurrencyCode,
+      
+      _Carrier,
+      _Customer
 }

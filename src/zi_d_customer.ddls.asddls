@@ -7,6 +7,7 @@ define view entity ZI_D_Customer as select from /dmo/customer
   first_name as FirstName,
   last_name as LastName,
   title as Title,
+  
   concat_with_space(concat_with_space(title, first_name, 1), last_name, 1) as Customer,
   street as Street,
   postal_code as PostalCode,
