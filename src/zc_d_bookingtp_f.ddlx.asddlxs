@@ -2,19 +2,21 @@
 
 @UI.headerInfo: { typeName: 'Booking',
                   typeNamePlural: 'Bookings',
-                  title.value: 'BookingId',
+                  title.value: 'TravelBookingDisplay',
                   description.value: 'BookingDate' }
 
 annotate entity ZC_D_BookingTP_F with
 
 {
   @UI.facet: [ { position: 10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'BookingDetails', label: 'Booking Details' },
-               { position: 20,
+               { position: 20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'SupplementsDetails', label: 'Supplements' },
+               { position: 30,
                  type: #FIELDGROUP_REFERENCE,
-                 targetQualifier: 'PersonalInformation',
-                 label: 'Personal Information' } ]
-//  @UI.fieldGroup: [ { position: 10, qualifier: 'BookingDetails' } ]
-//  @UI.lineItem: [ { position: 10 } ]
+                 targetQualifier: 'CustomerDetails',
+                 label: 'Customer Details' } ]
+  @UI.hidden: true
+  TravelBookingDisplay;
+
   @UI.hidden: true
   TravelId;
 
@@ -26,7 +28,7 @@ annotate entity ZC_D_BookingTP_F with
   @UI.lineItem: [ { position: 30 } ]
   BookingDate;
 
-  @UI.fieldGroup: [ { position: 40, qualifier: 'BookingDetails' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'CustomerDetails' } ]
   @UI.lineItem: [ { position: 40 } ]
   CustomerId;
 
@@ -46,13 +48,14 @@ annotate entity ZC_D_BookingTP_F with
   @UI.lineItem: [ { position: 70 } ]
   FlightDate;
 
-  @UI.fieldGroup: [ { position: 80, qualifier: 'BookingDetails' } ]
-  @UI.lineItem: [ { position: 80 } ]
+  @UI.hidden: true
   FlightPrice;
 
-  @UI.hidden: true
+  @UI.fieldGroup: [ { position: 80, qualifier: 'BookingDetails', label: 'Price' } ]
+  @UI.lineItem: [ { position: 80, label: 'Price' } ]
   CurrencyCode;
 
+  @UI.fieldGroup: [ { position: 10, qualifier: 'CustomerDetails', label: 'Customer Name' } ]
   @UI.lineItem: [ { position: 10 } ]
   CustomerName;
 
@@ -62,6 +65,13 @@ annotate entity ZC_D_BookingTP_F with
 
   @UI.hidden: true
   AirportToName;
-  
 
+  @UI.fieldGroup: [ { position: 20, qualifier: 'SupplementsDetails', label: 'Supplement Id' } ]
+  SupplementId;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'SupplementsDetails', label: 'Supplement Description' } ]
+  SupplementDescription;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'SupplementsDetails', label: 'Supplement Category' } ]
+  SupplementCategory;
 }

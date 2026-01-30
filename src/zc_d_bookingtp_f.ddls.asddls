@@ -14,9 +14,11 @@ define view entity ZC_D_BookingTP_F
   key BookingId,
 
       BookingDate,
+      TravelBookingDisplay,
 
       @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_D_CustomerVH', element: 'CustomerId' } } ]
       CustomerId,
+
       CarrierId,
       ConnectionId,
       FlightDate,
@@ -25,12 +27,21 @@ define view entity ZC_D_BookingTP_F
       @Semantics.amount.currencyCode: 'CurrencyCode'
       FlightPrice,
 
+      @ObjectModel.text.element: [ 'FlightPrice' ]
       CurrencyCode,
+
       CustomerName,
+
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_D_SUPPLEMENTVH', element: 'SupplementId' } } ]
+      SupplementId,
+
+      SupplementDescription,
+      SupplementCategory,
 
       /* Associations */
       _Flight        : redirected to parent ZC_D_FlightTP,
-      _Flight._AirportFrom2.name     as AirportFromName,
-      _Flight._AirportTo2.name     as AirportToName
-//
+      _Flight._AirportFrom2.name as AirportFromName,
+      _Flight._AirportTo2.name   as AirportToName
+      
 }
+where TravelId is not initial and BookingId is not initial and CustomerId is not initial

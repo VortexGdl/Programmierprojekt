@@ -4,6 +4,7 @@
 
 @EndUserText.label: 'Booking for Flights'
 
+/*+[hideWarning] { "IDS" : [ "CARDINALITY_CHECK" ]  } */
 define view entity ZR_D_BookingTP_F
   as select from ZI_D_Booking
 
@@ -11,9 +12,7 @@ define view entity ZR_D_BookingTP_F
     on  $projection.CarrierId    = _Flight.CarrierId
     and $projection.ConnectionId = _Flight.ConnectionID
     and $projection.FlightDate   = _Flight.FlightDate
-
-//  association [1..1] to        /dmo/carrier   as _Carrier
-//    on $projection.CarrierId = _Carrier.carrier_id
+   association [1..1] to /dmo/suppl_text      as _SupplementTexts on  $projection.SupplementId = _SupplementTexts.supplement_id
 
 {
   key TravelId,
@@ -37,7 +36,17 @@ define view entity ZR_D_BookingTP_F
       cast('EUR' as abap.cuky)                                 as CurrencyCode,
 
       _Flight,
-      _Carrier
+      _Carrier,
+      SupplementId,
+      concat( concat(TravelId, ' / '), BookingId ) as TravelBookingDisplay,
+      _SupplementTexts.description as SupplementDescription,
+            case when instr(_SupplementTexts.supplement_id, 'BV') > 0 then 'Beverage'
+            when instr(_SupplementTexts.supplement_id, 'ML') > 0 then 'Meal'
+            when instr(_SupplementTexts.supplement_id, 'LU') > 0 then 'Luggage'
+            when instr(_SupplementTexts.supplement_id, 'EX') > 0 then 'Extra'
+            else ''
+            end as SupplementCategory
+      
 }
 
 where FlightDate >= $session.system_date

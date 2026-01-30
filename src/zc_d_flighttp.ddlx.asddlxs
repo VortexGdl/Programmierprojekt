@@ -1,6 +1,11 @@
 @Metadata.layer: #CUSTOMER
 
-@UI.headerInfo: { typeName: 'Flight', typeNamePlural: 'Flights', title.value: 'Route', description.value: 'ConnectionId' }
+@UI.headerInfo: { typeName: 'Flight',
+                  typeNamePlural: 'Flights',
+                  title.value: 'Route',
+                  description.value: 'CarrierName',
+                  imageUrl: 'CarrierLogo' }
+
 @UI.lineItem: [ { criticality: 'OccupancyCriticality' } ]
 @UI.presentationVariant: [ { sortOrder: [ { by: 'FlightDate', direction: #DESC } ] } ]
 
@@ -9,14 +14,18 @@ annotate entity ZC_D_FlightTP
 
 {
   /* Facets */
-  @UI.facet: [ { position: 10, targetQualifier: 'FlightDetails', label: 'Customer Details', type: #FIELDGROUP_REFERENCE },
+  @UI.facet: [ { position: 10, targetQualifier: 'FlightDetails', label: 'Flight Details', type: #FIELDGROUP_REFERENCE },
                { position: 20, targetElement: '_Bookings', label: 'Bookings', type: #LINEITEM_REFERENCE },
                { position: 30, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE } ]
 
   /* Fields */
+//  @UI.fieldGroup: [ { position: 1, qualifier: 'FlightDetails' } ]
   @UI.lineItem: [ { position: 10, label: 'Airline Id', importance: #HIGH } ]
   @UI.selectionField: [ { position: 10 } ]
   CarrierId;
+
+  @UI.lineItem: [ { position: 1, label: 'Logo', importance: #HIGH } ]
+  CarrierLogo;
 
   @UI.fieldGroup: [ { position: 10, qualifier: 'FlightDetails' } ]
   CarrierName;
@@ -31,11 +40,11 @@ annotate entity ZC_D_FlightTP
   @UI.selectionField: [ { position: 30 } ]
   FlightDate;
 
-  @UI.fieldGroup: [ { position: 40, qualifier: 'FlightDetails' } ]
-  @UI.lineItem: [ { position: 40, label: 'Price', importance: #HIGH } ]
+  @UI.hidden: true
   Price;
 
-  @UI.hidden: true
+  @UI.fieldGroup: [ { position: 40, label: 'Flight Price', qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 40, label: 'Price', importance: #HIGH } ]
   CurrencyCode;
 
   @UI.fieldGroup: [ { position: 50, qualifier: 'FlightDetails' } ]
@@ -46,7 +55,7 @@ annotate entity ZC_D_FlightTP
   @UI.lineItem: [ { position: 50, label: 'Plane Type', importance: #HIGH } ]
   PlaneTypeId;
 
-  @UI.fieldGroup: [ { position: 20, label: 'Available Seats', qualifier: 'AdminData' } ]
+  @UI.fieldGroup: [ { position: 50, label: 'Available Seats', qualifier: 'AdminData' } ]
   @UI.lineItem: [ { position: 100, label: 'Available Seats' } ]
   AvailableSeats;
 
@@ -58,6 +67,7 @@ annotate entity ZC_D_FlightTP
   @UI.selectionField: [ { position: 50 } ]
   AirportToID;
 
+  @UI.dataPoint.criticality: 'OccupancyCriticality'
   @UI.fieldGroup: [ { position: 90,
                       qualifier: 'TravelDetails',
                       criticality: 'OccupancyCriticality',
@@ -69,8 +79,30 @@ annotate entity ZC_D_FlightTP
   OccupancyCriticality;
 
   @UI.fieldGroup: [ { position: 50, label: 'Starting Airport', qualifier: 'FlightDetails' } ]
+  @UI.hidden: true
   AirportFromName;
 
   @UI.fieldGroup: [ { position: 60, label: 'Landing Airport', qualifier: 'FlightDetails' } ]
+  @UI.hidden: true
   AirportToName;
+
+  @UI.fieldGroup: [ { position: 70, label: 'Departure Time', qualifier: 'FlightDetails' } ]
+  DepartureTime;
+
+  @UI.fieldGroup: [ { position: 80, label: 'Arrival Time', qualifier: 'FlightDetails' } ]
+  ArrivalTime;
+
+
+  @UI.hidden: true
+  Distance;
+
+  @UI.fieldGroup: [ { position: 90, label: 'Distance', qualifier: 'FlightDetails' } ]
+  DistanceUnit;
+
+  @UI.fieldGroup: [ { position: 20, label: 'Total Seats', qualifier: 'AdminData' } ]
+  @UI.hidden: true
+  SeatsMax;
+
+  @UI.hidden: true
+  SeatsOccupied;
 }

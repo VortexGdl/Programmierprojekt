@@ -4,28 +4,37 @@
 
 @EndUserText.label: 'Booking Interface'
 
+/*+[hideWarning] { "IDS" : [ "CARDINALITY_CHECK" ]  } */
 define view entity ZI_D_Booking
   as select from /dmo/booking
-    association [1..1] to        /dmo/carrier   as _Carrier
+
+  association [1..1] to /dmo/carrier       as _Carrier
     on $projection.CarrierId = _Carrier.carrier_id
-    association [1..1] to /dmo/customer as _Customer on $projection.CustomerId = _Customer.customer_id
+
+  association [1..1] to /dmo/customer      as _Customer
+    on $projection.CustomerId = _Customer.customer_id
+
+  association [0..1] to /dmo/booksuppl_m as _Supplements
+    on  $projection.TravelId  = _Supplements.travel_id
+    and $projection.BookingId = _Supplements.booking_id
 
 {
-  key travel_id     as TravelId,
-  key booking_id    as BookingId,
+  key travel_id                 as TravelId,
+  key booking_id                as BookingId,
 
-      booking_date  as BookingDate,
-      customer_id   as CustomerId,
-      carrier_id    as CarrierId,
-      connection_id as ConnectionId,
-      flight_date   as FlightDate,
+      booking_date              as BookingDate,
+      customer_id               as CustomerId,
+      carrier_id                as CarrierId,
+      connection_id             as ConnectionId,
+      flight_date               as FlightDate,
 
       @Semantics.amount.currencyCode: 'CurrencyCode'
 
-      flight_price  as FlightPrice,
+      flight_price              as FlightPrice,
 
-      currency_code as CurrencyCode,
-      
+      currency_code             as CurrencyCode,
+
       _Carrier,
-      _Customer
+      _Customer,
+      _Supplements.supplement_id as SupplementId
 }
